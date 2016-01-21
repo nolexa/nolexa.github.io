@@ -2,6 +2,8 @@
 layout: page
 title: Blog
 excerpt: "An archive of blog posts sorted by date."
+image:
+  feature: foggy-sunset-500.jpg
 search_omit: true
 ---
 

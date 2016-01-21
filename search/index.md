@@ -5,7 +5,7 @@ date:
 modified:
 excerpt:
 image:
-  feature:
+  feature: frosty-trallebo-500.jpg
 search_omit: true
 sitemap: false
 ---
