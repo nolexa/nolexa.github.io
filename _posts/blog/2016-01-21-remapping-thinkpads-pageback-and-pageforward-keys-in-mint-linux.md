@@ -8,6 +8,8 @@ tags: [linux, mint, keyboard]
 image:
   feature:
 date: "2016-01-16"
+comments: true
+share: true
 ---
 
 ## Obnoxious keyboard layout
@@ -22,9 +24,10 @@ I wanted to disable the **Page Back** and **Page Forward** keys or re-map them t
 
 To begin with, we need to know what codes send the keys we want to re-map. I will start the `xev` utility in a terminal and press the page-back and page-forward keys. Here is the command line:
 
-```bash
+{% highlight bash %}
 xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'
-```
+{% endhighlight %}
+
 It gives us the key codes in the first position and the key symbols in the second position:
 
     166 XF86Back
@@ -38,9 +41,10 @@ We also need to know key symbols to which we want to remap the keys. We want to 
 ## Re-mapping the keys
 
 Now, we want to remap **166** to **Prior** and **167** to **Next**. That will require overriding the default `xmodmap` configuration by a local `~/.Xmodmap` file. First, we'll get the original mappings by running the [xmodmap][2] command:
-```bash
+{% highlight bash %}
 xmodmap -pke | grep "XF86Back\|XF86Forward" >> ~/.Xmodmap
-```
+{% endhighlight %}
+
 Then the following default mapping lines captured in `~/.Xmodmap`
 
     keycode 166 = XF86Back NoSymbol XF86Back NoSymbol XF86Back XF86Back
@@ -52,9 +56,9 @@ have to be edited, replacing the key symbols by the desired ones:
     keycode 167 = Next NoSymbol Next NoSymbol Next Next
 
 The local mappings file can be immediately activated by feeding it to `xmodmap`:
-```bash
+{% highlight bash %}
 xmodmap ~/.Xmodmap
-```
+{% endhighlight %}
 
 ## Loading the mapping at startup
 
